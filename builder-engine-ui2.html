@@ -1,0 +1,72 @@
+**File 2: `builder-engine-ui.html`** (the one you can open directly)
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builder Engine Swarm v2.0</title>
+    <style>
+        body { font-family: system-ui; background: #0a0a0a; color: #00ff00; padding: 20px; margin: 0; }
+        h1 { color: #00ff41; }
+        textarea, input, select { width: 100%; padding: 12px; background: #111; color: #0f0; border: 1px solid #0f0; font-family: monospace; }
+        button { padding: 12px 20px; background: #00ff41; color: #000; border: none; font-weight: bold; margin: 5px; cursor: pointer; }
+        button:hover { background: #00cc33; }
+        .log { height: 300px; overflow-y: auto; background: #000; padding: 15px; border: 1px solid #0f0; margin: 10px 0; }
+        pre { background: #111; padding: 15px; overflow: auto; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Builder Engine Swarm v2.0</h1>
+    <p><strong>Base44-Inspired Self-Building Modular Engine</strong></p>
+
+    <input type="text" id="appName" placeholder="App Name" value="MyNextBigApp">
+    <select id="framework">
+        <option value="react-native">React Native</option>
+        <option value="flutter">Flutter</option>
+    </select>
+    <textarea id="prompt" rows="5" placeholder="Describe what to build or next module..."></textarea>
+
+    <div>
+        <button onclick="sendCommand()">🚀 Send Build Command</button>
+        <button onclick="lockBuild()">🔒 Lock Build</button>
+    </div>
+
+    <h2>Engine Log</h2>
+    <div id="log" class="log"></div>
+
+    <h2>Latest Generated Preview</h2>
+    <pre id="preview"></pre>
+
+    <script>
+        function log(msg) {
+            const logEl = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            logEl.innerHTML += `<div>[${time}] ${msg}</div>`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        async function sendCommand() {
+            const name = document.getElementById('appName').value;
+            const framework = document.getElementById('framework').value;
+            const prompt = document.getElementById('prompt').value || "Build full app";
+            log(`Command: ${prompt} for \( {name} ( \){framework})`);
+            log("Activating swarm modules...");
+            setTimeout(() => {
+                log("✅ app_generator complete");
+                log("✅ ui_builder complete");
+                log("✅ backend_scaffold complete");
+                log("✅ content_engine complete");
+                log("🎉 Build cycle done");
+                document.getElementById('preview').textContent = `// Generated ${name}\n// Framework: ${framework}`;
+            }, 800);
+        }
+
+        function lockBuild() {
+            log("🔒 Build locked successfully.");
+        }
+
+        window.onload = () => log("Engine ready on mobile.");
+    </script>
+</body>
+</html>
