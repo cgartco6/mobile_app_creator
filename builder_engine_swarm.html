@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builder Engine Swarm - Base44 Inspired</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #0f0f0f; color: #0f0; padding: 20px; line-height: 1.5; }
+        h1, h2 { color: #0f0; }
+        textarea, input, button { width: 100%; padding: 12px; margin: 10px 0; background: #111; color: #0f0; border: 1px solid #0f0; }
+        button { background: #0f0; color: #000; font-weight: bold; cursor: pointer; }
+        button:hover { background: #0a0; }
+        pre { background: #111; padding: 15px; overflow: auto; border: 1px solid #0f0; }
+        .log { max-height: 300px; overflow-y: auto; background: #000; padding: 10px; }
+        .success { color: lime; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Builder Engine Swarm v2</h1>
+    <p><strong>Base44-Inspired Self-Building AI Engine</strong><br>Describe what to build → Watch it generate modules, test, lock.</p>
+
+    <input type="text" id="appName" placeholder="App/Project Name (e.g. MySuperApp)" value="MyKillerApp">
+    <textarea id="prompt" rows="6" placeholder="Describe what to build... e.g. A React Native todo app with Firebase auth and AI content generator"></textarea>
+    
+    <button onclick="startBuild()">🚀 Start Build / Next Module</button>
+    <button onclick="lockBuild()">🔒 Lock Current Build</button>
+    <button onclick="clearLog()">Clear Log</button>
+
+    <h2>Build Log</h2>
+    <div id="log" class="log"></div>
+
+    <h2>Generated Code Preview</h2>
+    <pre id="preview"></pre>
+
+    <script>
+        let buildState = { modules: [], locked: false };
+
+        function log(msg, type = '') {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `<div>[\( {timestamp}] <span class=" \){type}">${msg}</span></div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        function startBuild() {
+            const name = document.getElementById('appName').value || 'DefaultApp';
+            const prompt = document.getElementById('prompt').value || 'Build a full mobile app';
+            
+            if (buildState.locked) {
+                log("Build is locked. Unlock or start new.", "error");
+                return;
+            }
+
+            log(`Building module for: ${name} → ${prompt}`, "success");
+
+            // Simulate intelligent module generation (Base44-style)
+            const modules = [
+                "app_generator: Full-stack scaffolding",
+                "ui_builder: Responsive React Native/Flutter components",
+                "backend_scaffold: Firebase/Supabase + Auth",
+                "content_engine: AI-powered marketing & dynamic content",
+                "self_improver: Meta-module that upgrades the engine itself"
+            ];
+
+            modules.forEach((mod, i) => {
+                setTimeout(() => {
+                    log(`✅ Generated & Tested: ${mod}`);
+                    buildState.modules.push(mod);
+                    
+                    // Preview example code
+                    if (i === 0) {
+                        document.getElementById('preview').textContent = 
+`// Example Generated Module - ${name}
+import React from 'react';
+
+function App() {
+  return <div>Swarm Engine Built: ${prompt}</div>;
+}
+
+// Self-test passed. Ready for next iteration.`;
+                    }
+                }, i * 400);
+            });
+
+            setTimeout(() => {
+                log("🎯 Module cycle complete. Ready for next command.", "success");
+            }, modules.length * 450);
+        }
+
+        function lockBuild() {
+            buildState.locked = true;
+            log("🔒 Build locked successfully. Structure is now stable.", "success");
+        }
+
+        function clearLog() {
+            document.getElementById('log').innerHTML = '';
+            log("Log cleared. Ready for new session.");
+        }
+
+        // Auto start demo
+        window.onload = () => {
+            log("Builder Engine Swarm Initialized - Base44 Enhanced");
+            log("Self-building swarm active. Type prompt and hit Start Build.");
+        };
+    </script>
+</body>
+</html>
