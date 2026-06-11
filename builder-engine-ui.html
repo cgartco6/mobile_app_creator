@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builder Engine Swarm</title>
+    <style>
+        body { font-family: Arial; background: #000; color: #0f0; padding: 15px; }
+        textarea, input { width: 100%; background: #111; color: #0f0; border: 1px solid #0f0; padding: 10px; margin: 10px 0; }
+        button { background: #0f0; color: black; padding: 12px; font-weight: bold; width: 100%; margin: 5px 0; }
+        .log { background: #111; padding: 10px; height: 250px; overflow-y: scroll; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Builder Engine Swarm</h1>
+    <p>Base44-Inspired - Tell it what to build</p>
+    
+    <input id="name" placeholder="App name" value="MyNextApp">
+    <textarea id="prompt" rows="5" placeholder="Describe the app or next module..."></textarea>
+    
+    <button onclick="build()">🚀 Build / Next Module</button>
+    <button onclick="lock()">🔒 Lock Build</button>
+    
+    <div id="log" class="log"></div>
+    
+    <script>
+        function log(msg) {
+            const div = document.getElementById('log');
+            div.innerHTML += `<div>> ${msg}</div>`;
+            div.scrollTop = div.scrollHeight;
+        }
+        
+        function build() {
+            const name = document.getElementById('name').value;
+            const prompt = document.getElementById('prompt').value || "full mobile app";
+            log(`Building ${name}: ${prompt}`);
+            log("✅ Module generated (simulated in browser)");
+            log("🔄 Ready for next command");
+        }
+        
+        function lock() {
+            log("🔒 Build locked - structure stable");
+        }
+        
+        log("Engine ready. Type prompt and build.");
+    </script>
+</body>
+</html>
